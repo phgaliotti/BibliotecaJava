@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8" />
+<title>Insert title here</title>
+</head>
+<body>
+	<table>
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>Título</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${livros.empty}">
+				<td colspan="2">Sem livros</td>
+			</tr>
+
+			<tr th:each="livro : ${livros}">
+				<td th:text="${livro.id}">1</td>
+				<td>
+					<a href="#" th:href="@{'/livros/'+${livro.id}}" th:text="${livro.nome}"> Título </a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

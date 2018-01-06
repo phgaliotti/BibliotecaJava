@@ -1,0 +1,9 @@
+#Padronizando as mensagens de erros
+
+NotBlank.java.lang.String = Campo obrigatorio
+NotEmpty.java.lang.Integer = Campo obrigatorio
+NotBlank.livro.nome = Titulo obrigatório
+NotNull.livro.quantidadePaginas = Campo obrigatorio
+Size.livro.nome = O numero minimo de caracteres eh {1} e o maximo eh {2}
+Min.livro.quantidadePaginas = O numero minimo de paginas é {1}
+Format.error.png = Formato permitido apenas .PNG

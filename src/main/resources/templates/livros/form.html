@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+<title>Adicionar novo livro</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Biblioteca</h1>
+	<div layout:fragment="content" class="container">
+
+		<form id="livroForm" th:action="@{/livros/(form)}" method="post" th:object="${livro}" action="#" 
+			enctype="multipart/form-data"
+		 	style="width:50%">
+		 	
+			<input type="hidden" th:field="*{id}" /> 
+			
+			<div class="form-group">
+				<label for="capaurl">Capa do livro</label> 
+				<input type="file" id="capaUrl" name="capaurl" />
+				<span th:if="${message}" style="color: red;" th:text="${message}">Message Error</span>
+			</div>
+			
+			<div class="form-group">
+				<label for="nome">Nome do livro: </label>
+				<input class="form-control" id="nome" type="text" th:field="*{nome}" />
+				
+				<span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome Error</span>
+		    </div>
+			<div class="form-group">
+				<label for="totalPaginas">Total de Páginas: </label>
+				<input class="form-control" id="totalPaginas" type="text" th:field="*{quantidadePaginas}" /> 
+				<span th:if="${#fields.hasErrors('quantidadePaginas')}" th:errors="*{quantidadePaginas}">Quantidade de paginas Error</span>
+		    </div>
+		    <div class="form-group">
+				<label for="staticAutor">Autor</label>
+				<select class="form-control" th:field="*{autor}">
+				  	<option th:each="autor : ${autores}"  th:value="${autor.id}" th:text="${autor.nome}">Nome do autor</option>
+				</select>
+			</div>
+			
+			<button type="submit" class="btn btn-primary">Gravar</button>
+		</form>
+
+	</div>
+</body>
+</html>

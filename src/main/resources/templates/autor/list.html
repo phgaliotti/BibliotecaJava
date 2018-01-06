@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+<title>Lista de Autores</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Biblioteca</h1>
+	<div layout:fragment="content" class="container">
+		<table class="table table-condensed">
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>Autor</td>
+					<td colspan="2" style="text-align: right;">
+						<a href="/autor/novo"><button class="btn btn-primary" style="padding: 1px;">Novo Autor</button></a>
+					</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:if="${autores.empty}">
+					<td colspan="2">Sem Autores cadastrados</td>
+				</tr>
+
+				<tr th:each="autor : ${autores}">
+					<td th:text="${autor.id}">1</td>
+					<td><a href="#" th:href="@{'/autor/'+${autor.id}}" th:text="${autor.nome}"> Autor </a></td>
+					
+					<td><a href="#" th:href="@{'/autor/alterar/'+${autor.id}}"> Alterar </a></td>
+					<td><a href="#" th:href="@{'/autor/excluir/'+${autor.id}}"> Excluir </a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+</html>

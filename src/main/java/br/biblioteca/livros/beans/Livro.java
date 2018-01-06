@@ -8,6 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -19,11 +22,15 @@ public class Livro {
 	@GeneratedValue
 	private Long id;
 	
+	@NotNull
+	@Size(min = 2, max = 100)
 	private String nome;
 	
-	private String foto;
+	private String capa;
 	
-	private Integer quantidade;
+	@NotNull
+	@Min(10)
+	private Integer quantidadePaginas;
 	
 	private String isbn;
 	
@@ -84,23 +91,27 @@ public class Livro {
 	public void setNome(String titulo) {
 		this.nome = titulo;
 	}
-
-	public String getFoto() {
-		return foto;
+	
+	public String getCapa() {
+		return capa;
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
+	public void setCapa(String capa) {
+		this.capa = capa;
 	}
 
-	public Integer getQuantidade() {
-		return quantidade;
+	public Integer getQuantidadePaginas() {
+		return quantidadePaginas;
 	}
 
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
+	public void setQuantidadePaginas(Integer quantidadePaginas) {
+		this.quantidadePaginas = quantidadePaginas;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Livro [id=" + id + ", nome=" + nome + ", quantidadePaginas=" + quantidadePaginas + "]";
+	}
+
 
 }

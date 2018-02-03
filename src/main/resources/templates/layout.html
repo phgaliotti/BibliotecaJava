@@ -23,30 +23,51 @@
 			</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a class="brand" th:href="@{/livros/list}" href="#"> Livros </a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/livros/novo}" href="#"> Add Livro </a></li>
-				<li><a class="brand" th:href="@{/autor/list}" href="#"> Autores </a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/autor/novo}" href="#"> Add Autor </a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/usuarios/list}" href="#"> Usuários </a></li>
-				<li><a class="brand" th:href="@{/emprestimo/novo}" href="#">Emprestar livro</a></li>
-				<li><a class="brand" th:href="@{/emprestimo/meusemprestimos}" href="#">Meus Emprestimos</a></li>
-				<li sec:authorize="!isAuthenticated()"><a class="brand" th:href="@{/user/login}" href="#"> Login </a></li>
-				<li sec:authorize="isAuthenticated() :"><a class="brand" th:href="@{/user/logout}" href="#"> Logout </a></li>
+	           <li><a href="/">Home</a></li>
+	           <li><a class="brand" th:href="@{/livros/list}" href="#">Livros </a></li>
+	           <li><a class="brand" th:href="@{/autor/list}" href="#">Autores </a></li>
+	           <li><a class="brand" th:href="@{/emprestimo/novo}" href="#">Emprestar livro</a></li>
+	           <li><a class="brand" th:href="@{/emprestimo/meusemprestimos}" href="#">Meus Emprestimos</a></li>
+	           <li sec:authorize="!isAuthenticated()"><a class="brand" th:href="@{/user/login}" href="#"> Login </a></li>
+	           <li sec:authorize="isAuthenticated()"><a class="brand" th:href="@{/user/logout}" href="#"> Logout </a></li>
+	           
+	           <li class="dropdown">
+	           		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true">Administrativo<span class="caret"></span></a>
+		            <ul class="dropdown-menu">
+		            	<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/autor/novo}" href="#"> Add Autor </a></li>
+						<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/livros/novo}" href="#">Add Livro</a></li>
+		               	<li role="separator" class="divider"></li>
+		               	<li class="dropdown-header">Usuários</li>
+		               	<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/user/list}" href="#">Lista de usuários</a></li>
+		               	<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/user/registration}" href="#">Add novo usuário</a></li>
+		             </ul>
+	           </li>
+	          </ul>
+<!-- 			<ul class="nav navbar-nav"> -->
+<!-- 				<li><a class="brand" th:href="@{/livros/list}" href="#"> Livros </a></li> -->
+<!-- 				<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="brand" th:href="@{/livros/novo}" href="#"> Add Livro </a></li> -->
+<!-- 				<li><a class="brand" th:href="@{/autor/list}" href="#"> Autores </a></li> -->
+<!-- 				
+<!-- 				<li><a class="brand" th:href="@{/emprestimo/novo}" href="#">Emprestar livro</a></li> -->
+<!-- 				<li><a class="brand" th:href="@{/emprestimo/meusemprestimos}" href="#">Meus Emprestimos</a></li> -->
+<!-- 				<li sec:authorize="!isAuthenticated()"><a class="brand" th:href="@{/user/login}" href="#"> Login </a></li> -->
+<!-- 				<li sec:authorize="isAuthenticated() :"><a class="brand" th:href="@{/user/logout}" href="#"> Logout </a></li> -->
 				
-			</ul>
+				
+<!-- 			</ul> -->
 			
 			<div sec:authorize="isAuthenticated()" class="navbar-header text-right" style="float: right;">
-				<span  class="navbar-brand" style="font-size: 15px; color: #404042;">
+				<span  class="navbar-brand" style="font-size: 14px; color: #777777;">
 					Bem-vindo de volta [[${#httpServletRequest.remoteUser}]]
 				</span>
 			</div>
 			
-			<div sec:authorize="!isAuthenticated()" class="navbar-header text-right" style="float: right;">
-				<span class="navbar-brand" style="font-size: 15px; color: #404042;">
-					Você não está logado
-				</span>
-				<a class="brand" th:href="@{/user/login}" href="#">clique aqui para entrar </a>
-			</div>
+<!-- 			<div sec:authorize="!isAuthenticated()" class="navbar-header text-right" style="float: right;"> -->
+<!-- 				<span class="navbar-brand" style="font-size: 15px; color: #404042;"> -->
+<!-- 					Você não está logado -->
+<!-- 				</span> -->
+<!-- 				<a class="brand" th:href="@{/user/login}" href="#">clique aqui para entrar </a> -->
+<!-- 			</div> -->
 			
 		</nav>
 		<h1 layout:fragment="header">cabeçalho falso</h1>

@@ -13,10 +13,11 @@
 			<thead>
 				<tr>
 					<td>ID</td>
+					<td>Livro</td>	
+					<td>Capa</td>
+					<td>Usuario</td>	
 					<td>Data da Devolução</td>
 					<td>Data do Emprestimo</td>
-					<td>Livro</td>	
-					<td>Usuario</td>		
 				</tr>
 			</thead>
 			<tbody>
@@ -26,19 +27,17 @@
 
 				<tr th:each="emprestimo : ${meusEmprestimos}">
 					<td th:text="${emprestimo.id}">1</td>
-					
-					<td><span th:text="${emprestimo.dataDevolucao}" /></td>
-					<td><span th:text="${emprestimo.dataEmprestimo}" /></td>
-					
+
 					<td><span th:text="${emprestimo.livro.nome}" /></td>
 					
 					<th scope="row">
-						<img th:if="${emprestimo.livro.capa}" th:src="@{'/' + ${emprestimo.livro.capa}}" width="100px" />
+						<img th:if="${emprestimo.livro.capa}" th:src="@{${emprestimo.livro.capa}}" width="100px" />
 						<img th:unless="${emprestimo.livro.capa}" th:src="@{'../img/unless.png'}" width="100px" />
 					</th>
 					
 					<td><span th:text="${emprestimo.usuario.username}" /></td>
-					
+					<td><span th:text="${emprestimo.dataDevolucao}" /></td>
+					<td><span th:text="${emprestimo.dataEmprestimo}" /></td>
 				</tr>
 			</tbody>
 		</table>

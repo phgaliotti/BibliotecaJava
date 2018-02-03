@@ -68,7 +68,7 @@ public class EmprestimosController {
 		emprestimoRepository.save(emprestimo);
 		
 		this.meusEmprestimos = emprestimoRepository.findAll();
-		return new ModelAndView("emprestimo/list", "meusEmprestimos", this.meusEmprestimos);
+		return new ModelAndView("/meusemprestimos", "meusEmprestimos", this.meusEmprestimos);
 	}
 	
 	public String formatDate(String tipoData) {

@@ -4,11 +4,13 @@ import java.util.HashSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
 
 import br.biblioteca.livros.beans.User;
 import br.biblioteca.livros.repository.RoleRepository;
 import br.biblioteca.livros.repository.UserRepository;
 
+@Repository
 public class UserServiceImpl implements UserService {
 	
 	@Autowired
@@ -31,6 +33,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User findByUsername(String username) {
 		return userRepository.findByUsername(username);
+	}
+
+	@Override
+	public Iterable<User> findAll() {
+		return userRepository.findAll();
 	}
 
 }

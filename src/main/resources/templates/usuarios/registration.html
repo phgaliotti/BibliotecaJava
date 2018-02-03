@@ -19,6 +19,9 @@
 			<input placeholder="Senha" class="form-control" type="text" th:field="*{password}" />
 			<span  th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Nome Error</span><br/>
 			
+			<input placeholder="Confirme a senha" class="form-control" type="text" th:field="*{passwordConfirm}" />
+			<span  th:if="${#fields.hasErrors('passwordConfirm')}" th:errors="*{passwordConfirm}">Nome Error</span><br/>
+			
 			<button type="submit" name="login" class="btn btn-primary" style="width:100%;">Criar</button>
 		</form>
 	</div>

@@ -57,16 +57,15 @@ public class LivroController {
 								BindingResult bindingResult,
 								Model model) {
 		
-		if(capaUrl.getOriginalFilename().equals("")) {
-			model.addAttribute("message", "A capa não pode ser vazia");
-			return new ModelAndView("livro/form");
-		}else {
-			if(capaUrl.getContentType().equals("image/png")){
-				String webPath = new FileSaver().write("uploaded-images",capaUrl);
-				livro.setCapa(webPath);
-			}else{
-				model.addAttribute("message", "Arquivo em formato errado. Permitido apenas png");
-				return new ModelAndView("livro/form");
+		if (livro.getId() != null) {
+			if (capaUrl.getOriginalFilename().length() > 0) {
+				incluiCapa(capaUrl, livro, model);
+			}
+		} else {
+			if ("".equals(capaUrl.getOriginalFilename())) {
+				model.addAttribute("capa", "A capa não pode ser vazia");
+			} else {
+				incluiCapa(capaUrl, livro, model);
 			}
 		}
 		
@@ -102,6 +101,15 @@ public class LivroController {
 		
 		for (Livro livro : this.livros) {
 			System.out.println(livro.getNome());
+		}
+	}
+	
+	private void incluiCapa(MultipartFile capaUrl, Livro livro, Model model) {
+		if (capaUrl.getContentType().equals("image/png")) {
+			String webPath = new FileSaver().write("uploaded-images",capaUrl);
+			livro.setCapa(webPath);
+		} else {
+			model.addAttribute("capa", "Arquivo em formato errado. Permitido apenas png");
 		}
 	}
 

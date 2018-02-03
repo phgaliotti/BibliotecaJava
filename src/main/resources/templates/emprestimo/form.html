@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="layout">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+
+<title>Adicionar novo emprestimo</title>
+</head>
+<body>
+	<h1 layout:fragment="header">Biblioteca</h1>
+	<div layout:fragment="content" class="container">
+
+		<form id="emprestimo" th:action="@{/emprestimo/novoemprestimo/(form)}" method="post" th:object="${emprestimo}" action="#" 
+			enctype="multipart/form-data"
+		 	style="width:50%">
+		 	
+			<input type="hidden" th:field="*{id}" /> 
+			
+			 <div class="form-group">
+				<label for="staticLivro">Livro</label>
+				<select class="form-control" th:field="*{livro}">
+				  	<option th:each="livro : ${livros}"  th:value="${livro.id}" th:text="${livro.nome}">Nome do Livro</option>
+				</select>
+			</div>
+			
+			<div class="form-group">
+				<label for="dataPrevDevolucao">Data prevista para a devolução: </label>
+				<input class="form-control" id="dataPrevDevolucao" type="text" th:value="${dataDevolucao}" disabled/>
+		    </div>
+			
+			<div class="form-group">
+				<label for="dataEmprestimo">Data do Empréstimo: </label>
+				<input class="form-control" id="dataEmprestimo" type="text" th:value="${dataEmprestimo}" disabled/>
+		    </div>
+		    
+			<button type="submit" class="btn btn-primary">Gravar</button>
+		</form>
+
+	</div>
+</body>
+</html>

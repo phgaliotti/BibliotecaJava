@@ -10,7 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileSaver {
 
 	public String write(String baseFolder, MultipartFile file) {
-		String realPath = "/Volumes/Arquivos/FIB/POS/workspace/livros/" + baseFolder;
+		String realPath = "C:/Desenv/Repositorios/BibliotecaJava/src/main/resources/static/" + baseFolder;
+		
+		//String realPath = "/Volumes/Arquivos/FIB/POS/workspace/livros/" + baseFolder;
 
 		// se for windows, verificar corretamenteo path da pasta, por exemplo
 		//  String realPath = "D:\\Arquivos\\" + baseFolder;

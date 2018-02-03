@@ -3,7 +3,6 @@ package br.biblioteca.livros.usercontrol.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,39 +20,23 @@ public class SecurityServiceImpl implements SecurityService {
 	@Override
 	public String findLoggedInUsername() {
 		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-
 		if (userDetails instanceof UserDetails) {
 			return ((UserDetails) userDetails).getUsername();
 		}
+
 		return null;
 	}
 
 	@Override
-	public UserDetails findLoggedInUser() {
-		Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
+	public void autologin(String username, String password) {
+		UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+		UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+				userDetails, password, userDetails.getAuthorities());
 
-		if (userDetails instanceof UserDetails) {
-			return (UserDetails) userDetails;
-		}
-		return null;
-	}
+		authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
-	@Override
-	public void login(String username, String password) {
-		try {
-			UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-			UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-					userDetails, password, userDetails.getAuthorities());
-
-			Authentication auth = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-
-			if (auth.isAuthenticated()) {
-				SecurityContextHolder.getContext().setAuthentication(auth);
-			}
-
-		} catch (Exception e) {
-			throw new RuntimeException();
+		if (usernamePasswordAuthenticationToken.isAuthenticated()) {
+			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 		}
 	}
-
 }

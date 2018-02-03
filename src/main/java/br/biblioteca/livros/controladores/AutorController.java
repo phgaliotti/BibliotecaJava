@@ -15,8 +15,6 @@ import org.springframework.web.servlet.ModelAndView;
 import br.biblioteca.livros.beans.Autor;
 import br.biblioteca.livros.repository.AutorRepository;
 
-
-
 @Controller
 @RequestMapping("/autor")
 public class AutorController {

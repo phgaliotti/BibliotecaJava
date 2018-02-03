@@ -30,14 +30,14 @@ public class Emprestimo {
 	private Livro livro;
 
 	@OneToOne
-	@JoinColumn(name = "USUARIO_ID")
-	private Usuario usuario;
+	@JoinColumn(name = "user_id")
+	private User usuario;
 
-	public Usuario getUsuario() {
+	public User getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(User usuario) {
 		this.usuario = usuario;
 	}
 

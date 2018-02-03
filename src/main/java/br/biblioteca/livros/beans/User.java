@@ -1,54 +1,40 @@
 package br.biblioteca.livros.beans;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+import javax.persistence.Table;
 
 @Entity
-public class Usuario implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-
-	public Usuario() { }
-
-	public Usuario(String username, String password) {
-		this.username = username;
-		this.password = password;
-	}
-
+@Table(name = "user")
+public class User {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotNull
 	private String username;
-
-	@NotNull
 	private String password;
-	
-	@NotNull
-	private Roles role;
+	private String passwordConfirm;
+
+	@ManyToMany
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
 
 	@OneToMany(mappedBy = "usuario")
 	private List<Review> reviews = new ArrayList<>();
 
 	public List<Review> getReviews() {
 		return reviews;
-	}
-
-	public Roles getRoles() {
-		return role;
-	}
-
-	public void setRoles(Roles role) {
-		this.role = role;
 	}
 
 	public void setReviews(List<Review> reviews) {
@@ -79,9 +65,20 @@ public class Usuario implements Serializable {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "Usuario [username=" + username + ", password=" + this.password + ", roles=" + this.role.toString() + "]";
+	public String getPasswordConfirm() {
+		return passwordConfirm;
 	}
 
+	public void setPasswordConfirm(String passwordConfirm) {
+		this.passwordConfirm = passwordConfirm;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+	
 }

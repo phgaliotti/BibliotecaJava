@@ -19,7 +19,7 @@ import br.biblioteca.livros.beans.Emprestimo;
 import br.biblioteca.livros.beans.Livro;
 import br.biblioteca.livros.repository.EmprestimoRespository;
 import br.biblioteca.livros.repository.LivroRepository;
-import br.biblioteca.livros.repository.UsuarioRepository;
+import br.biblioteca.livros.repository.UserRepository;
 
 @Controller
 @RequestMapping("/emprestimo")
@@ -32,7 +32,7 @@ public class EmprestimosController {
 	private LivroRepository livroRepository;
 	
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private UserRepository usuarioRepository;
 	
 	private Iterable<Emprestimo> meusEmprestimos;
 	private Iterable<Livro> livros;

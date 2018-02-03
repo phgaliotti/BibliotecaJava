@@ -30,8 +30,8 @@ public class UserController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-//	@Autowired
-//	private SecurityService securityService;
+	@Autowired
+	private SecurityService securityService;
 
 	@Autowired
 	private UserValidator userValidator;

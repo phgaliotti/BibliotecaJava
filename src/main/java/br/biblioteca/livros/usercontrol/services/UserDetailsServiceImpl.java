@@ -8,12 +8,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import br.biblioteca.livros.beans.Usuario;
 import br.biblioteca.livros.repository.UsuarioRepository;
 
-@Service
+@Component
 public class UserDetailsServiceImpl implements UserDetailsService {
 
 	@Autowired
@@ -39,4 +40,5 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
 	}
+	
 }
